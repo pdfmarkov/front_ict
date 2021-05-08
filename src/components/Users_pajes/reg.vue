@@ -144,12 +144,12 @@ export default {
         group: this.group,
         login: this.email,
         password: this.pass,
-        status: this.status,
+        role: this.status,
       }
 
       axios({
         method: 'post',
-        url: '/regUser',
+        url: '/api/aunt/register',
         data: formDataReg
       }).then(function (response) {
         console.log(response);
