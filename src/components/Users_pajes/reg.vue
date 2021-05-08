@@ -105,6 +105,7 @@
 
 <script>
 import {email, required, sameAs, minLength} from  'vuelidate/lib/validators'
+import axios from "axios";
 export default {
   name: "reg",
   data() {
@@ -134,7 +135,7 @@ export default {
         return
       }
 
-      const formDataReg = {
+      let formDataReg = {
         name: this.name,
         surname: this.surname,
         course: this.course,
@@ -142,9 +143,17 @@ export default {
         email: this.email,
         pass: this.pass,
       }
-      console.log(JSON.stringify(formDataReg))
 
-      this.$router.push('Login')
+      axios({
+        method: 'post',
+        url: '/regUser',
+        data: formDataReg
+      }).then(function (response) {
+        console.log(response);
+        this.$router.push('Login')
+      }).catch(function (response) {
+        console.log(response);
+      });
     },
     goTo: function (path) {
       this.$router.push('/'+path);
