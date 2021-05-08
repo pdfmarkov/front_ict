@@ -73,8 +73,8 @@ export default {
       }
 
       let formDataReg = {
-        email: this.email,
-        pass: this.pass,
+        login: this.email,
+        password: this.pass,
       }
 
       axios({

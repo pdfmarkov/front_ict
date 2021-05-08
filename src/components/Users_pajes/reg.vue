@@ -12,6 +12,20 @@
                  v-bind:class="{'error_in_data': ($v.surname.$dirty && !$v.surname.required),
                  'in_data': true}">
 
+          <label class="selector_label">Студент</label>
+          <input class="selector" type="radio" value="student" v-model="status"
+                 :class="{invalid: ($v.status.$dirty && !$v.status.required)}">
+
+          <label class="selector_label">Ментор</label>
+          <input class="selector" type="radio" value="mentor" v-model="status"
+                 :class="{invalid: ($v.status.$dirty && !$v.status.required)}">
+
+          <div
+              class="err_message"
+              v-if="$v.status.$dirty && !$v.status.required">
+            Не выбран статус
+          </div>
+          <br/>
           <label>КУРС:</label>
           <br/>
 
@@ -112,6 +126,7 @@ export default {
     return {
       name: '',
       surname: '',
+      status: '',
       course: '',
       group: '',
       email: '',
@@ -123,6 +138,7 @@ export default {
     name: {required},
     surname: {required},
     course: {required},
+    status: {required},
     group: {required},
     email: {email, required},
     pass: {required, minLength: minLength(6)},
@@ -136,12 +152,12 @@ export default {
       }
 
       let formDataReg = {
-        name: this.name,
-        surname: this.surname,
+        firstname: this.name,
+        secondname: this.surname,
         course: this.course,
         group: this.group,
-        email: this.email,
-        pass: this.pass,
+        login: this.email,
+        password: this.pass,
       }
 
       axios({
