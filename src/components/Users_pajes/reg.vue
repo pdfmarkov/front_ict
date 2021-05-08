@@ -144,7 +144,7 @@ export default {
       }
       console.log(JSON.stringify(formDataReg))
 
-      this.$router.push('/login ')
+      this.$router.push('Login')
     },
     goTo: function (path) {
       this.$router.push('/'+path);
