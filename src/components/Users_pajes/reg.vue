@@ -13,11 +13,11 @@
                  'in_data': true}">
 
           <label class="selector_label">Студент</label>
-          <input class="selector" type="radio" value="student" v-model="status"
+          <input class="selector" type="radio" value="STUDENT" v-model="status"
                  :class="{invalid: ($v.status.$dirty && !$v.status.required)}">
 
           <label class="selector_label">Ментор</label>
-          <input class="selector" type="radio" value="mentor" v-model="status"
+          <input class="selector" type="radio" value="MENTOR" v-model="status"
                  :class="{invalid: ($v.status.$dirty && !$v.status.required)}">
 
           <div
