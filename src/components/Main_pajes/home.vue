@@ -2,9 +2,9 @@
   <div>
     <header>
       <upper_component></upper_component>
+      <head_component></head_component>
     </header>
 
-    <head_component></head_component>
     <post_component v-for="el in posts" :key="el.title"
                     :post_title=el.title :post_text=el.text :post_members=el.members
     :post_type=el.type></post_component>
