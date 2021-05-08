@@ -87,18 +87,6 @@
             Пароль должен иметь больше {{$v.pass.$params.minLength.min}} символов
           </div>
 
-          <input class="in_data" type="password" placeholder="ПОВТОРИТЬ ПАРОЛЬ" title="Повторить пароль"
-                 v-model.trim="rep_pass"
-                 v-bind:class="{'error_in_data': ($v.rep_pass.$dirty && !$v.rep_pass.sameAsPassword) ||
-                 ($v.pass.$dirty && !$v.pass.required),
-                 'in_data': true}">
-
-          <div
-              class="err_message"
-              v-if="$v.rep_pass.$dirty && !$v.rep_pass.sameAsPassword">
-            Пароли не совпадают
-          </div>
-
           <a class="trouble_link" @click="goTo('login')">ВЕРНУТЬСЯ КО ВХОДУ</a>
 
           <button title="Зайти в аккаунт" class="loging__btn" type="submit">
@@ -118,7 +106,7 @@
 </template>
 
 <script>
-import {email, required, sameAs, minLength} from  'vuelidate/lib/validators'
+import {email, required, minLength} from  'vuelidate/lib/validators'
 import axios from "axios";
 export default {
   name: "reg",
@@ -131,7 +119,6 @@ export default {
       group: '',
       email: '',
       pass: '',
-      rep_pass: '',
     }
   },
   validations:{
@@ -142,7 +129,6 @@ export default {
     group: {required},
     email: {email, required},
     pass: {required, minLength: minLength(6)},
-    rep_pass:{sameAsPassword: sameAs('pass')},
   },
   methods: {
     startReg(){
@@ -158,6 +144,7 @@ export default {
         group: this.group,
         login: this.email,
         password: this.pass,
+        status: this.status,
       }
 
       axios({
