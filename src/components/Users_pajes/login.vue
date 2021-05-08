@@ -29,6 +29,10 @@
             Пароль должен иметь больше {{$v.pass.$params.minLength.min}} символов
           </div>
 
+          <a class="trouble_link" @click="goTo('pass_recovery')"> ЗАБЫЛИ ПАРОЛЬ </a>
+          <br/>
+          <a class="trouble_link" @click="goTo('reg')"> РЕГИСТРАЦИЯ </a>
+
           <button title="Зайти в аккаунт" class="loging__btn" type="submit">
             <svg id="arrow" width="59" height="24" viewBox="0 0 59 24" fill="black" xmlns="http://www.w3.org/2000/svg">
               <path d="M58.0607 13.0607C58.6464 12.4749 58.6464 11.5251
@@ -74,7 +78,10 @@ export default {
       console.log(JSON.stringify(formDataReg))
 
       this.$router.push('/')
-    }
+    },
+    goTo: function (path) {
+      this.$router.push('/'+path);
+    },
   }
 }
 </script>
@@ -82,6 +89,12 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap%27');
+
+.trouble_link {
+  float: left;
+  text-decoration: underline;
+  margin: 0 0 0 30px;
+}
 
 #main_title {
   line-height: 65px;

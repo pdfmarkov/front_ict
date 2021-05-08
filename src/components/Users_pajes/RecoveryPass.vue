@@ -1,53 +1,9 @@
 <template>
-  <form @submit.prevent="startReg">
+  <form @submit.prevent="startRecov">
     <div id="loging">
       <div id="login-form">
         <fieldset>
-          <label id="main_title">РЕГИСТРАЦИЯ</label>
-          <input type="text" placeholder="ИМЯ" title="имя" v-model.trim="name"
-                 v-bind:class="{'error_in_data': ($v.name.$dirty && !$v.name.required),
-                 'in_data': true}">
-
-          <input class="in_data" type="text" placeholder="ФАМИЛИЯ" title="Фамилия" v-model.trim="surname"
-                 v-bind:class="{'error_in_data': ($v.surname.$dirty && !$v.surname.required),
-                 'in_data': true}">
-
-          <label>КУРС:</label>
-          <br/>
-
-          <label class="selector_label">1</label>
-          <input class="selector" type="radio" value="1" v-model="course"
-                 :class="{invalid: ($v.course.$dirty && !$v.course.required)}">
-
-          <label class="selector_label">2</label>
-          <input class="selector" type="radio" value="2" v-model="course"
-                 :class="{invalid: ($v.course.$dirty && !$v.course.required)}">
-
-          <label class="selector_label">3</label>
-          <input class="selector" type="radio" value="3" v-model="course"
-                 :class="{invalid: ($v.course.$dirty && !$v.course.required)}">
-
-          <label class="selector_label">4</label>
-          <input class="selector" type="radio" value="4" v-model="course"
-                 :class="{invalid: ($v.course.$dirty && !$v.course.required)}">
-
-          <label class="selector_label">5</label>
-          <input class="selector" type="radio" value="5" v-model="course"
-                 :class="{invalid: ($v.course.$dirty && !$v.course.required)}">
-
-          <label class="selector_label">6</label>
-          <input class="selector" type="radio" value="6" v-model="course"
-                 :class="{invalid: ($v.course.$dirty && !$v.course.required)}">
-
-          <div
-              class="err_message"
-              v-if="$v.course.$dirty && !$v.course.required">
-            Не выбран курс
-          </div>
-
-          <input class="in_data" type="text" placeholder="ГРУППА" title="Группа" v-model.trim="group"
-                 v-bind:class="{'error_in_data': ($v.group.$dirty && !$v.group.required),
-                 'in_data': true}">
+          <label id="main_title">ВОССТАНОВЛЕНИЕ ПАРОЛЯ</label>
 
           <input class="in_data" id="email" type="text" placeholder="ПОЧТА" title="Почта" v-model.trim="email"
                  v-bind:class="{'error_in_data': ($v.email.$dirty && !$v.email.required),
@@ -57,36 +13,7 @@
               v-if="$v.email.$dirty && !$v.email.required || $v.email.$dirty && !$v.email.email ">
             Некорректные данные
           </div>
-
-          <input class="in_data" type="password" placeholder="ПАРОЛЬ" title="Пароль" v-model.trim="pass"
-                 v-bind:class="{'error_in_data': ($v.pass.$dirty && !$v.pass.required) ||
-                 ($v.pass.$dirty && !$v.pass.minLength),
-                 'in_data': true}">
-          <div
-              class="err_message"
-              v-if="$v.pass.$dirty && !$v.pass.required">
-            Введите пароль
-          </div>
-          <div
-              class="err_message"
-              v-else-if="$v.pass.$dirty && !$v.pass.minLength">
-            Пароль должен иметь больше {{$v.pass.$params.minLength.min}} символов
-          </div>
-
-          <input class="in_data" type="password" placeholder="ПОВТОРИТЬ ПАРОЛЬ" title="Повторить пароль"
-                 v-model.trim="rep_pass"
-                 v-bind:class="{'error_in_data': ($v.rep_pass.$dirty && !$v.rep_pass.sameAsPassword) ||
-                 ($v.pass.$dirty && !$v.pass.required),
-                 'in_data': true}">
-
-          <div
-              class="err_message"
-              v-if="$v.rep_pass.$dirty && !$v.rep_pass.sameAsPassword">
-            Пароли не совпадают
-          </div>
-
           <a class="trouble_link" @click="goTo('login')">ВЕРНУТЬСЯ КО ВХОДУ</a>
-
           <button title="Зайти в аккаунт" class="loging__btn" type="submit">
             <svg id="arrow" width="59" height="24" viewBox="0 0 59 24" fill="black" xmlns="http://www.w3.org/2000/svg">
               <path d="M58.0607 13.0607C58.6464 12.4749 58.6464 11.5251
@@ -104,47 +31,31 @@
 </template>
 
 <script>
-import {email, required, sameAs, minLength} from  'vuelidate/lib/validators'
+import {email, required} from  'vuelidate/lib/validators'
 export default {
-  name: "reg",
+  name: "RecoveryPass",
   data() {
     return {
-      name: '',
-      surname: '',
-      course: '',
-      group: '',
       email: '',
-      pass: '',
-      rep_pass: '',
     }
   },
   validations:{
-    name: {required},
-    surname: {required},
-    course: {required},
-    group: {required},
     email: {email, required},
-    pass: {required, minLength: minLength(6)},
-    rep_pass:{sameAsPassword: sameAs('pass')},
   },
   methods: {
-    startReg(){
+    startRecov(){
       if(this.$v.$invalid){
         this.$v.$touch()
         return
       }
 
       const formDataReg = {
-        name: this.name,
-        surname: this.surname,
-        course: this.course,
-        group: this.group,
         email: this.email,
-        pass: this.pass,
       }
+
       console.log(JSON.stringify(formDataReg))
 
-      this.$router.push('/login ')
+      this.$router.push('/login')
     },
     goTo: function (path) {
       this.$router.push('/'+path);

@@ -1,22 +1,12 @@
 <template>
   <div id="app">
-    <component :is="layout">
-      <router-view/>
-    </component>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import LoginLayout from './layouts/LoginLayout'
+
 export default {
-  computed:{
-    layout(){
-      return (this.$route.meta.layout || 'login')
-    }
-  },
-  components: {
-    LoginLayout
-  }
 }
 </script>
 

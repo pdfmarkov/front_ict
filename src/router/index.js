@@ -21,7 +21,19 @@ const routes = [
         name: 'Reg',
         meta: {layout: 'reg'},
         component: () => import('../components/Users_pajes/reg.vue')
-    }
+    },
+    {
+        path: '/pass_recovery',
+        name: 'RecoveryPass',
+        meta: {layout: 'pass_recovery'},
+        component: () => import('../components/Users_pajes/RecoveryPass.vue')
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        meta: {layout: 'profile'},
+        component: () => import('../components/Users_pajes/profile.vue')
+    },
 ]
 const router = new VueRouter({
     mode: 'history',
